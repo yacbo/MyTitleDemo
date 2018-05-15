@@ -62,12 +62,10 @@ QWidget *parentWidget; //父窗口
 QLabel *titleLabel; //标题名
 
 void initValue(); //初始化值
-void
-mousePressEvent(QMouseEvent * event); //鼠标点击事件
-void
-mouseReleaseEvent(QMouseEvent * event); //鼠标释放事件
-void
-mouseMoveEvent(QMouseEvent * event); //鼠标移动事件
+void mousePressEvent(QMouseEvent * event); //鼠标点击事件
+void mouseReleaseEvent(QMouseEvent * event); //鼠标释放事件
+void mouseMoveEvent(QMouseEvent * event); //鼠标移动事件
+void mouseDoubleClickEvent(QMouseEvent *event); //双击鼠标事件
 };
 
 #endif // TITLEBAR_H

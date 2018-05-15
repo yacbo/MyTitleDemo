@@ -171,25 +171,34 @@ parentWidget->close();
 /*************************** 鼠标点击 ***************************/
 void TitleBar::mousePressEvent(QMouseEvent *event)
 {
-if(event->button() == Qt::LeftButton)
-{
-mousePress = true;
-}
-movePoint = event->globalPos() - parentWidget->pos();
+    if(event->button() == Qt::LeftButton)
+    {
+    mousePress = true;
+    }
+    movePoint = event->globalPos() - parentWidget->pos();
 }
 
 /************************** 鼠标释放 ***************************/
 void TitleBar::mouseReleaseEvent(QMouseEvent *event)
 {
-mousePress = false;
+    mousePress = false;
 }
 
 /************************** 鼠标移动 **************************/
 void TitleBar::mouseMoveEvent(QMouseEvent *event)
 {
-if(mousePress)
-{
-QPoint movePos = event->globalPos();
-parentWidget->move(movePos - movePoint);
+    if(mousePress)
+    {
+    QPoint movePos = event->globalPos();
+    parentWidget->move(movePos - movePoint);
+    }
 }
+
+/************************** 鼠标双击 **************************/
+void TitleBar::mouseDoubleClickEvent(QMouseEvent *event)
+{
+    if(event->button() == Qt::LeftButton)
+        {
+            showMax();
+        }
 }
