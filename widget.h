@@ -19,11 +19,26 @@ public:
 
 public:
     void resizeEvent(QResizeEvent *event);
-    static void setStyle(const QString &style);
+
 
 private:
     Ui::Widget *ui;
     TitleBar *titleBar;
+
+public:
+    int countFlag(QPoint p, int row);
+    void setCursorType(int flag);
+    int countRow(QPoint p);
+
+protected:
+    void mousePressEvent(QMouseEvent *event);
+    void mouseReleaseEvent(QMouseEvent *event);
+    void mouseDoubleClickEvent(QMouseEvent *event);
+    void mouseMoveEvent(QMouseEvent *event);
+private:
+    bool _isleftpressed;
+    int _curpos;
+    QPoint _plast;
 };
 
 #endif // WIDGET_H

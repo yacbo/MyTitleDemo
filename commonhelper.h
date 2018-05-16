@@ -3,7 +3,7 @@
 
 #include <QFile>
 #include <QApplication>
-extern int clothesCnt;
+
 class CommonHelper
 {
 public:

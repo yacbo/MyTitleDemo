@@ -17,6 +17,7 @@
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QTableView>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -24,8 +25,10 @@ QT_BEGIN_NAMESPACE
 class Ui_Widget
 {
 public:
-    QPushButton *pushButton;
+    QVBoxLayout *verticalLayout_2;
+    QVBoxLayout *verticalLayout;
     QLineEdit *lineEdit;
+    QPushButton *pushButton;
     QTableView *tableView;
 
     void setupUi(QWidget *Widget)
@@ -33,15 +36,33 @@ public:
         if (Widget->objectName().isEmpty())
             Widget->setObjectName(QStringLiteral("Widget"));
         Widget->resize(400, 300);
-        pushButton = new QPushButton(Widget);
-        pushButton->setObjectName(QStringLiteral("pushButton"));
-        pushButton->setGeometry(QRect(200, 50, 75, 23));
+        verticalLayout_2 = new QVBoxLayout(Widget);
+        verticalLayout_2->setSpacing(6);
+        verticalLayout_2->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
+        verticalLayout = new QVBoxLayout();
+        verticalLayout->setSpacing(6);
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        verticalLayout->setContentsMargins(-1, 0, -1, -1);
         lineEdit = new QLineEdit(Widget);
         lineEdit->setObjectName(QStringLiteral("lineEdit"));
-        lineEdit->setGeometry(QRect(70, 50, 113, 20));
+
+        verticalLayout->addWidget(lineEdit);
+
+        pushButton = new QPushButton(Widget);
+        pushButton->setObjectName(QStringLiteral("pushButton"));
+
+        verticalLayout->addWidget(pushButton);
+
         tableView = new QTableView(Widget);
         tableView->setObjectName(QStringLiteral("tableView"));
-        tableView->setGeometry(QRect(70, 80, 256, 192));
+        tableView->setEnabled(true);
+
+        verticalLayout->addWidget(tableView);
+
+
+        verticalLayout_2->addLayout(verticalLayout);
+
 
         retranslateUi(Widget);
 

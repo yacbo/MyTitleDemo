@@ -7,6 +7,11 @@
 /*************************** 构造函数 ***************************/
 TitleBar::TitleBar(QWidget *parent) : QWidget(parent)
 {
+    // 不继承父组件的背景色
+    setAutoFillBackground(false);
+    // 使用 Highlight 作为背景色
+    //setBackgroundRole(QPalette::Highlight);
+
     //最大化按钮设置图标
     QPixmap pixMap = this->style()->standardPixmap(QStyle::SP_TitleBarMaxButton);
     maxButton = new QPushButton(this);
@@ -58,10 +63,17 @@ TitleBar::TitleBar(QWidget *parent) : QWidget(parent)
     this->setLayout(hBoxLayout);
 
     //设置背景色
-    QPalette paletteColor(palette());
-    paletteColor.setColor(QPalette::Background, QColor(150, 150, 150));
+//    QPalette paletteColor(palette());
+//    paletteColor.setColor(QPalette::Background, QColor(150, 150, 150));
+//    this->setAutoFillBackground(true);
+//    this->setPalette(paletteColor);
+
     this->setAutoFillBackground(true);
-    this->setPalette(paletteColor);
+    QPalette palette;
+    QPixmap pixmap(":/pic/qianlan.png");
+    palette.setBrush(QPalette::Window, QBrush(pixmap));
+    this->setPalette(palette);
+
 
     //重置窗口大小
     this->resize(parent->width(), TITLEBARHEIGHT);
@@ -75,65 +87,65 @@ TitleBar::TitleBar(QWidget *parent) : QWidget(parent)
 /*************************** 设置标题 ***************************/
 void TitleBar::setWindowTitle(const QString &title)
 {
-titleLabel->setText(title);
+    titleLabel->setText(title);
 }
 
 /*************************** 设置图标 ***************************/
 void TitleBar::setWindowIcon(const QString &icon)
 {
-imgLabel->setPixmap(QPixmap(icon));
+    imgLabel->setPixmap(QPixmap(icon));
 }
 
 /*************************** 设置按钮 ***************************/
 void TitleBar::subWindowButton(const int &type)
 {
-if(type == TITLEBAR::MINWIDGET)
-{
-SAFEDELETE(minButton);
-}
-else if(type == TITLEBAR::MAXWIDGET)
-{
-SAFEDELETE(maxButton);
-}
-else if(type == TITLEBAR::MAXMINWIDGET)
-{
-SAFEDELETE(minButton);
-SAFEDELETE(maxButton);
-}
+    if(type == TITLEBAR::MINWIDGET)
+    {
+        SAFEDELETE(minButton);
+    }
+    else if(type == TITLEBAR::MAXWIDGET)
+    {
+        SAFEDELETE(maxButton);
+    }
+    else if(type == TITLEBAR::MAXMINWIDGET)
+    {
+        SAFEDELETE(minButton);
+        SAFEDELETE(maxButton);
+    }
 }
 
 /*************************** 初始化 ***************************/
 void TitleBar::initValue()
 {
-//设置样式表
-closeButton->setStyleSheet("QPushButton{background-color:transparent;}""QPushButton:hover{background-color:rgb(169, 169, 169);}");
-closeButton->setToolTip("关闭");
-minButton->setStyleSheet("QPushButton{background-color:transparent;}""QPushButton:hover{background-color:rgb(169, 169, 169);}");
-minButton->setToolTip("最小化");
-maxButton->setStyleSheet("QPushButton{background-color:transparent;}""QPushButton:hover{background-color:rgb(169, 169, 169);}");
-maxButton->setToolTip("最大化");
-//colorButton->setStyleSheet("background-color:transparent;");
-colorButton->setStyleSheet("QPushButton{background-color:transparent;}""QPushButton:hover{background-color:rgb(169, 169, 169);}");
-colorButton->setToolTip("换肤");
+    //设置样式表
+    closeButton->setStyleSheet("QPushButton{background-color:transparent;}""QPushButton:hover{background-color:rgb(169, 169, 169);}");
+    closeButton->setToolTip("关闭");
+    minButton->setStyleSheet("QPushButton{background-color:transparent;}""QPushButton:hover{background-color:rgb(169, 169, 169);}");
+    minButton->setToolTip("最小化");
+    maxButton->setStyleSheet("QPushButton{background-color:transparent;}""QPushButton:hover{background-color:rgb(169, 169, 169);}");
+    maxButton->setToolTip("最大化");
+    //colorButton->setStyleSheet("background-color:transparent;");
+    colorButton->setStyleSheet("QPushButton{background-color:transparent;}""QPushButton:hover{background-color:rgb(169, 169, 169);}");
+    colorButton->setToolTip("换肤");
 
 
-//连接信号与槽
-connect(minButton, SIGNAL(clicked(bool)), this, SLOT(showMin()));
-connect(maxButton, SIGNAL(clicked(bool)), this, SLOT(showMax()));
-connect(closeButton, SIGNAL(clicked(bool)), this, SLOT(showClose()));
-connect(colorButton, SIGNAL(clicked(bool)), this, SLOT(changeClothe()));
+    //连接信号与槽
+    connect(minButton, SIGNAL(clicked(bool)), this, SLOT(showMin()));
+    connect(maxButton, SIGNAL(clicked(bool)), this, SLOT(showMax()));
+    connect(closeButton, SIGNAL(clicked(bool)), this, SLOT(showClose()));
+    connect(colorButton, SIGNAL(clicked(bool)), this, SLOT(changeClothes()));
 
-//按钮点击标志位
-mousePress = false;
+    //按钮点击标志位
+    mousePress = false;
 
-//将该窗口添加到父类窗口中
-QVBoxLayout *vBoxLayout = new QVBoxLayout(parentWidget);
+    //将该窗口添加到父类窗口中
+    QVBoxLayout *vBoxLayout = new QVBoxLayout(parentWidget);
 
-vBoxLayout->addWidget(this);
-vBoxLayout->addStretch();
-vBoxLayout->setSpacing(0);
-vBoxLayout->setContentsMargins(0, 0, 0, 0);
-parentWidget->setLayout(vBoxLayout);
+    vBoxLayout->addWidget(this);
+    vBoxLayout->addStretch();
+    vBoxLayout->setSpacing(0);
+    vBoxLayout->setContentsMargins(0, 0, 0, 0);
+    parentWidget->setLayout(vBoxLayout);
 }
 
 /*************************** 最大化 ***************************/
@@ -154,19 +166,19 @@ void TitleBar::showMax()
         maxButton->setToolTip("最大化");
         parentWidget->showNormal();
     }
-count ++;
+    count ++;
 }
 
 /*************************** 最小化 ***************************/
 void TitleBar::showMin()
 {
-parentWidget->showMinimized();
+    parentWidget->showMinimized();
 }
 
 /*************************** 关闭 ***************************/
 void TitleBar::showClose()
 {
-parentWidget->close();
+    parentWidget->close();
 }
 
 /*************************** 鼠标点击 ***************************/
@@ -174,7 +186,7 @@ void TitleBar::mousePressEvent(QMouseEvent *event)
 {
     if(event->button() == Qt::LeftButton)
     {
-    mousePress = true;
+        mousePress = true;
     }
     movePoint = event->globalPos() - parentWidget->pos();
 }
@@ -190,8 +202,8 @@ void TitleBar::mouseMoveEvent(QMouseEvent *event)
 {
     if(mousePress)
     {
-    QPoint movePos = event->globalPos();
-    parentWidget->move(movePos - movePoint);
+        QPoint movePos = event->globalPos();
+        parentWidget->move(movePos - movePoint);
     }
 }
 
@@ -199,13 +211,14 @@ void TitleBar::mouseMoveEvent(QMouseEvent *event)
 void TitleBar::mouseDoubleClickEvent(QMouseEvent *event)
 {
     if(event->button() == Qt::LeftButton)
-        {
-            showMax();
-        }
+    {
+        showMax();
+    }
 }
 
-void TitleBar::changeClothe()
+void TitleBar::changeClothes()
 {
+    static int clothesCnt = 0;
     switch (clothesCnt) {
     case 0:
         CommonHelper::setStyle(":/qss/white.qss");
@@ -220,3 +233,4 @@ void TitleBar::changeClothe()
     }
 
 }
+
