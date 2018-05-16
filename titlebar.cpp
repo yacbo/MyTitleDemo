@@ -206,5 +206,17 @@ void TitleBar::mouseDoubleClickEvent(QMouseEvent *event)
 
 void TitleBar::changeClothe()
 {
-    CommonHelper::setStyle(":/qss/white.qss");
+    switch (clothesCnt) {
+    case 0:
+        CommonHelper::setStyle(":/qss/white.qss");
+        clothesCnt = 1;
+        break;
+    case 1:
+        CommonHelper::setStyle(":/qss/black.qss");
+        clothesCnt = 0;
+        break;
+    default:
+        break;
+    }
+
 }

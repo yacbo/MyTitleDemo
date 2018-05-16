@@ -19,6 +19,7 @@ Widget::Widget(QWidget *parent) :
     titleBar->setWindowTitle("日月星辰");
 
     CommonHelper::setStyle(":/qss/black.qss");
+    clothesCnt = 0;
 }
 
 Widget::~Widget()
