@@ -6,18 +6,18 @@ Widget::Widget(QWidget *parent) :QWidget(parent),ui(new Ui::Widget)
 {
     ui->setupUi(this);
     this->setWindowFlags(Qt::FramelessWindowHint | windowFlags());
-
     // 设置无边框
     //this->setWindowFlags(Qt::FramelessWindowHint);
-
     // 背景透明
     //this-> setAttribute(Qt::WA_TranslucentBackground, true);
+    CommonHelper::setStyle(":/qss/blank.qss");
+
 
     titleBar = new TitleBar(this);
     titleBar->setWindowIcon(":/pic/123.png");
     titleBar->setWindowTitle("日月星辰");
-    //titleBar->SetTitleBackground(QColor(0,0,0),QColor(250,250,200));
-    //titleBar->setBackgroundColor(150,156,124);
+    ui->verticalLayout_2->setSpacing(0);   //设置控件的边框
+    ui->verticalLayout_2->setContentsMargins(1, 45, 1, 3);
 
     //构造
     this->setMouseTracking(true);

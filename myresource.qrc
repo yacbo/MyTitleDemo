@@ -6,5 +6,7 @@
         <file>qss/black.qss</file>
         <file>qss/white.qss</file>
         <file>pic/qianlan.png</file>
+        <file>pic/qianlan1.png</file>
+        <file>qss/blank.qss</file>
     </qresource>
 </RCC>

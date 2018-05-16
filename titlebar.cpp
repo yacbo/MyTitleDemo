@@ -70,7 +70,7 @@ TitleBar::TitleBar(QWidget *parent) : QWidget(parent)
 
     this->setAutoFillBackground(true);
     QPalette palette;
-    QPixmap pixmap(":/pic/qianlan.png");
+    QPixmap pixmap(":/pic/qianlan1.png");
     palette.setBrush(QPalette::Window, QBrush(pixmap));
     this->setPalette(palette);
 
@@ -226,6 +226,10 @@ void TitleBar::changeClothes()
         break;
     case 1:
         CommonHelper::setStyle(":/qss/black.qss");
+        clothesCnt = 2;
+        break;
+    case 2:
+        CommonHelper::setStyle(":/qss/blank.qss");
         clothesCnt = 0;
         break;
     default:
