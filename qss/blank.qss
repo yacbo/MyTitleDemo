@@ -684,17 +684,16 @@ QPushButton{
         height: 25px;
 }
 QPushButton:enabled {
-        background: rgb(68, 69, 73);
-        color: white;
+
 }
 QPushButton:!enabled {
-        
+
 }
 QPushButton:enabled:hover{
-       background: rgb(85, 85, 85);
+       background: rgb(0, 85, 85);
 }
 QPushButton:enabled:pressed{
-        background: rgb(80, 80, 80);
+        background: rgb(0, 80, 80);
 }
 
 QPushButton#blueButton {
