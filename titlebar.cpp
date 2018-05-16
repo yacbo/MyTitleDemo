@@ -3,7 +3,7 @@
 #include <QHBoxLayout>
 #include <QDebug>
 #include <QListView>
-
+#include "commonhelper.h"
 /*************************** 构造函数 ***************************/
 TitleBar::TitleBar(QWidget *parent) : QWidget(parent)
 {
@@ -23,7 +23,7 @@ TitleBar::TitleBar(QWidget *parent) : QWidget(parent)
     closeButton->setIcon(pixMap);
 
     //换肤按钮
-    pixMap.load("pic/color3.png");
+    pixMap.load(":/pic/color3.png");
     //pixMap = this->style()->standardPixmap(QStyle::SP_DialogHelpButton);
     colorButton = new QPushButton(this);
     colorButton->setIcon(pixMap);
@@ -121,6 +121,7 @@ colorButton->setToolTip("换肤");
 connect(minButton, SIGNAL(clicked(bool)), this, SLOT(showMin()));
 connect(maxButton, SIGNAL(clicked(bool)), this, SLOT(showMax()));
 connect(closeButton, SIGNAL(clicked(bool)), this, SLOT(showClose()));
+connect(colorButton, SIGNAL(clicked(bool)), this, SLOT(changeClothe()));
 
 //按钮点击标志位
 mousePress = false;
@@ -201,4 +202,9 @@ void TitleBar::mouseDoubleClickEvent(QMouseEvent *event)
         {
             showMax();
         }
+}
+
+void TitleBar::changeClothe()
+{
+    CommonHelper::setStyle(":/qss/white.qss");
 }

@@ -33,3 +33,6 @@ HEADERS  += widget.h \
     commonhelper.h
 
 FORMS    += widget.ui
+
+RESOURCES += \
+    myresource.qrc

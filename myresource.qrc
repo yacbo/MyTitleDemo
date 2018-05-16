@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/">
+        <file>pic/123.png</file>
+        <file>pic/color2.png</file>
+        <file>pic/color3.png</file>
+        <file>qss/black.qss</file>
+        <file>qss/white.qss</file>
+    </qresource>
+</RCC>

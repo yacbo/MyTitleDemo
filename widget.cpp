@@ -15,10 +15,10 @@ Widget::Widget(QWidget *parent) :
    //this-> setAttribute(Qt::WA_TranslucentBackground, true);
 
     titleBar = new TitleBar(this);
-    titleBar->setWindowIcon("pic/123.png");
+    titleBar->setWindowIcon(":/pic/123.png");
     titleBar->setWindowTitle("日月星辰");
 
-    CommonHelper::setStyle("qss/white.qss");
+    CommonHelper::setStyle(":/qss/black.qss");
 }
 
 Widget::~Widget()

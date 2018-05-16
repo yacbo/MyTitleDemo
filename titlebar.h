@@ -48,7 +48,7 @@ public slots:
 void showMax(); //最大化窗口
 void showMin(); //最小化窗口
 void showClose(); //关闭窗口
-
+void changeClothe();
 
 private:
 bool mousePress; //按钮点击标志位
