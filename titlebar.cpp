@@ -63,16 +63,16 @@ TitleBar::TitleBar(QWidget *parent) : QWidget(parent)
     this->setLayout(hBoxLayout);
 
     //设置背景色
-//    QPalette paletteColor(palette());
-//    paletteColor.setColor(QPalette::Background, QColor(150, 150, 150));
-//    this->setAutoFillBackground(true);
-//    this->setPalette(paletteColor);
-
+    QPalette paletteColor(palette());
+    paletteColor.setColor(QPalette::Background, QColor(150, 150, 150));
     this->setAutoFillBackground(true);
-    QPalette palette;
-    QPixmap pixmap(":/pic/qianlan1.png");
-    palette.setBrush(QPalette::Window, QBrush(pixmap));
-    this->setPalette(palette);
+    this->setPalette(paletteColor);
+
+//    this->setAutoFillBackground(true);
+//    QPalette palette;
+//    QPixmap pixmap(":/pic/qianlan1.png");
+//    palette.setBrush(QPalette::Window, QBrush(pixmap));
+//    this->setPalette(palette);
 
 
     //重置窗口大小
@@ -124,7 +124,7 @@ void TitleBar::initValue()
     minButton->setToolTip("最小化");
     maxButton->setStyleSheet("QPushButton{background-color:transparent;}""QPushButton:hover{background-color:rgb(169, 169, 169);}");
     maxButton->setToolTip("最大化");
-    //colorButton->setStyleSheet("background-color:transparent;");
+    imgLabel->setStyleSheet("background-color:transparent;");
     colorButton->setStyleSheet("QPushButton{background-color:transparent;}""QPushButton:hover{background-color:rgb(169, 169, 169);}");
     colorButton->setToolTip("换肤");
 

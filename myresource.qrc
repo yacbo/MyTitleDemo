@@ -8,5 +8,7 @@
         <file>pic/qianlan.png</file>
         <file>pic/qianlan1.png</file>
         <file>qss/blank.qss</file>
+        <file>pic/power_32.png</file>
+        <file>pic/power.png</file>
     </qresource>
 </RCC>

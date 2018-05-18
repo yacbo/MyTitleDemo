@@ -14,10 +14,10 @@ Widget::Widget(QWidget *parent) :QWidget(parent),ui(new Ui::Widget)
 
 
     titleBar = new TitleBar(this);
-    titleBar->setWindowIcon(":/pic/123.png");
+    titleBar->setWindowIcon(":/pic/power.png");
     titleBar->setWindowTitle("日月星辰");
     ui->verticalLayout_2->setSpacing(0);   //设置控件的边框
-    ui->verticalLayout_2->setContentsMargins(1, 45, 1, 3);
+    ui->verticalLayout_2->setContentsMargins(1, 40, 1, 3);
 
     //构造
     this->setMouseTracking(true);
