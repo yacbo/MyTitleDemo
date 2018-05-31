@@ -39,6 +39,8 @@ private:
     bool _isleftpressed;
     int _curpos;
     QPoint _plast;
+public:
+    void paintEvent(QPaintEvent*);
 };
 
 #endif // WIDGET_H

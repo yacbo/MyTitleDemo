@@ -48,7 +48,7 @@ public slots:
     void showMax(); //最大化窗口
     void showMin(); //最小化窗口
     void showClose(); //关闭窗口
-    void changeClothes();
+    void changeSkin();
 
 public:
     void initValue(); //初始化值
@@ -63,7 +63,7 @@ private:
     QPushButton *maxButton; //最大化按钮
     QPushButton *minButton; //最小化按钮
     QPushButton *closeButton; //关闭按钮
-    QPushButton *colorButton; //换肤按钮
+    QPushButton *skinButton; //换肤按钮
     QLabel *imgLabel; //图片框
     QWidget *parentWidget; //父窗口
     QLabel *titleLabel; //标题名
@@ -78,6 +78,9 @@ private:
     int m_colorR;
     int m_colorG;
     int m_colorB;
+
+public:
+    void hideSkinButton();
 };
 
 #endif // TITLEBAR_H

@@ -1,3 +1,9 @@
+QWidget#Widget {
+        border: 1px solid rgb(50, 50, 50);
+        background: rgb(50, 50, 50);
+}
+
+
 /**********子界面背景**********/
 QWidget#customWidget {
         background: rgb(68, 69, 73);

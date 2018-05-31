@@ -1,29 +1,42 @@
 #include "widget.h"
 #include "ui_widget.h"
 #include "commonhelper.h"
+#include <QPainter>
+#include <windows.h>
+#include <WinUser.h>
+#include <windowsx.h>
+#include <dwmapi.h>
+#include <objidl.h>
+#include <gdiplus.h>
+
 #define MARGIN 5
 Widget::Widget(QWidget *parent) :QWidget(parent),ui(new Ui::Widget)
 {
     ui->setupUi(this);
+    QIcon icon(":/pic/123.png");
+    setWindowIcon(icon);
+    setWindowTitle(QStringLiteral("日月星辰"));
+    //this->setWindowFlags(Qt::CustomizeWindowHint);
     this->setWindowFlags(Qt::FramelessWindowHint | windowFlags());
-    // 设置无边框
-    //this->setWindowFlags(Qt::FramelessWindowHint);
-    // 背景透明
-    //this-> setAttribute(Qt::WA_TranslucentBackground, true);
-    CommonHelper::setStyle(":/qss/blank.qss");
+    //this->setWindowFlags(Qt::FramelessWindowHint);// 设置无边框
+    //this-> setAttribute(Qt::WA_TranslucentBackground, true);// 背景透明
 
+    CommonHelper::setStyle(":/qss/blank.qss");  //设置全局样式
+    //this->setStyleSheet("QWidget{border: 5px solid rgb(50, 50, 50);}");
 
-    titleBar = new TitleBar(this);
-    titleBar->setWindowIcon(":/pic/power.png");
+    titleBar = new TitleBar(this);   //标题栏是子窗口
+    titleBar->setWindowIcon(":/pic/123.png");
     titleBar->setWindowTitle("日月星辰");
-    ui->verticalLayout_2->setSpacing(0);   //设置控件的边框
-    ui->verticalLayout_2->setContentsMargins(1, 40, 1, 3);
+
+    //ui->verticalLayout_2->setSpacing(0);   //设置控件的边框
+    ui->verticalLayout->setContentsMargins(MARGIN, 40, MARGIN, MARGIN);
 
     //构造
     this->setMouseTracking(true);
     _isleftpressed = false;
     _curpos = 0;//标记鼠标左击时的位置
     this->setMinimumSize(600, 400);//设置最小尺寸
+
 }
 
 Widget::~Widget()
@@ -37,9 +50,15 @@ void Widget::resizeEvent(QResizeEvent *event)
     titleBar->resize(this->width(), TitleBar::TITLEBARHEIGHT);
 }
 
-
 void Widget::mousePressEvent(QMouseEvent *event)
 {
+    QPoint leftTop(8,40);
+    QPoint rightBottom(this->geometry().width()-8,this->geometry().height()-8);
+    QRect rect(leftTop,rightBottom);
+    if(rect.contains(event->pos()))
+    {
+        return;
+    }
     if (event->button() == Qt::LeftButton)
     {
         this->_isleftpressed = true;
@@ -106,8 +125,6 @@ void Widget::mouseMoveEvent(QMouseEvent *event)//鼠标移动事件
     event->ignore();
 }
 
-
-
 int Widget::countFlag(QPoint p, int row)//计算鼠标在哪一列和哪一行
 {
     if (p.y()<MARGIN)
@@ -149,4 +166,18 @@ void Widget::setCursorType(int flag)//根据鼠标所在位置改变鼠标指针
 int Widget::countRow(QPoint p)//计算在哪一列
 {
     return (p.x()<MARGIN) ? 1 : (p.x()>(this->width() - MARGIN) ? 3 : 2);
+}
+
+void Widget::paintEvent(QPaintEvent*)//paintEvent函数由系统自动调用，用不着我们人为的去调用。
+{
+    // QPoint leftTop(MARGIN,40);
+    // QPoint rightBottom(this->geometry().width()-8,this->geometry().height()-8);
+    // QRect rect(leftTop,rightBottom);
+    // QPainter painter(this);
+    // painter.setPen(QPen(Qt::blue,1));//设置画笔形式
+//     painter.drawLine(20,20,220,220);//画直线
+//     painter.drawLine(20,220,220,20);
+//     painter.drawEllipse(20,20,200,200);//画圆
+    // painter.drawRect(rect);//画矩形
+
 }

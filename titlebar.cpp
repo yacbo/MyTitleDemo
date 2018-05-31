@@ -8,7 +8,7 @@
 TitleBar::TitleBar(QWidget *parent) : QWidget(parent)
 {
     // 不继承父组件的背景色
-    setAutoFillBackground(false);
+    //setAutoFillBackground(true);
     // 使用 Highlight 作为背景色
     //setBackgroundRole(QPalette::Highlight);
 
@@ -30,15 +30,15 @@ TitleBar::TitleBar(QWidget *parent) : QWidget(parent)
     //换肤按钮
     pixMap.load(":/pic/color3.png");
     //pixMap = this->style()->standardPixmap(QStyle::SP_DialogHelpButton);
-    colorButton = new QPushButton(this);
-    colorButton->setIcon(pixMap);
+    skinButton = new QPushButton(this);
+    skinButton->setIcon(pixMap);
 
     //设置标签
     imgLabel = new QLabel(this);
     titleLabel = new QLabel(this);
     titleLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
-    titleLabel->setStyleSheet("color:white");
-
+    //titleLabel->setStyleSheet("color:white");
+    titleLabel->setStyleSheet("QLabel {color: white;font-size: 25px;font-family:华文新魏}");
     //设置控件大小
     imgLabel->setFixedSize(CONTROLWIDTH, CONTROLWIDTH);
     imgLabel->setScaledContents(true);
@@ -47,14 +47,14 @@ TitleBar::TitleBar(QWidget *parent) : QWidget(parent)
     minButton->setFixedSize(CONTROLWIDTH, CONTROLWIDTH);
     maxButton->setFixedSize(CONTROLWIDTH, CONTROLWIDTH);
     closeButton->setFixedSize(CONTROLWIDTH, CONTROLWIDTH);
-    colorButton->setFixedSize(CONTROLWIDTH, CONTROLWIDTH);
+    skinButton->setFixedSize(CONTROLWIDTH, CONTROLWIDTH);
 
     //设置布局
     QHBoxLayout *hBoxLayout = new QHBoxLayout(this);
     hBoxLayout->addWidget(imgLabel);
     hBoxLayout->addSpacing(5);
     hBoxLayout->addWidget(titleLabel);
-    hBoxLayout->addWidget(colorButton);
+    hBoxLayout->addWidget(skinButton);
     hBoxLayout->addWidget(minButton);
     hBoxLayout->addWidget(maxButton);
     hBoxLayout->addWidget(closeButton);
@@ -64,7 +64,7 @@ TitleBar::TitleBar(QWidget *parent) : QWidget(parent)
 
     //设置背景色
     QPalette paletteColor(palette());
-    paletteColor.setColor(QPalette::Background, QColor(150, 150, 150));
+    paletteColor.setColor(QPalette::Background, QColor(200, 200, 200));
     this->setAutoFillBackground(true);
     this->setPalette(paletteColor);
 
@@ -125,15 +125,15 @@ void TitleBar::initValue()
     maxButton->setStyleSheet("QPushButton{background-color:transparent;}""QPushButton:hover{background-color:rgb(169, 169, 169);}");
     maxButton->setToolTip("最大化");
     imgLabel->setStyleSheet("background-color:transparent;");
-    colorButton->setStyleSheet("QPushButton{background-color:transparent;}""QPushButton:hover{background-color:rgb(169, 169, 169);}");
-    colorButton->setToolTip("换肤");
+    skinButton->setStyleSheet("QPushButton{background-color:transparent;}""QPushButton:hover{background-color:rgb(169, 169, 169);}");
+    skinButton->setToolTip("换肤");
 
 
     //连接信号与槽
     connect(minButton, SIGNAL(clicked(bool)), this, SLOT(showMin()));
     connect(maxButton, SIGNAL(clicked(bool)), this, SLOT(showMax()));
     connect(closeButton, SIGNAL(clicked(bool)), this, SLOT(showClose()));
-    connect(colorButton, SIGNAL(clicked(bool)), this, SLOT(changeClothes()));
+    connect(skinButton, SIGNAL(clicked(bool)), this, SLOT(changeSkin()));
 
     //按钮点击标志位
     mousePress = false;
@@ -142,7 +142,7 @@ void TitleBar::initValue()
     QVBoxLayout *vBoxLayout = new QVBoxLayout(parentWidget);
 
     vBoxLayout->addWidget(this);
-    vBoxLayout->addStretch();
+    vBoxLayout->addStretch(0);
     vBoxLayout->setSpacing(0);
     vBoxLayout->setContentsMargins(0, 0, 0, 0);
     parentWidget->setLayout(vBoxLayout);
@@ -189,12 +189,14 @@ void TitleBar::mousePressEvent(QMouseEvent *event)
         mousePress = true;
     }
     movePoint = event->globalPos() - parentWidget->pos();
+    QWidget::mousePressEvent(event);
 }
 
 /************************** 鼠标释放 ***************************/
 void TitleBar::mouseReleaseEvent(QMouseEvent *event)
 {
     mousePress = false;
+    QWidget::mouseReleaseEvent(event);
 }
 
 /************************** 鼠标移动 **************************/
@@ -205,6 +207,7 @@ void TitleBar::mouseMoveEvent(QMouseEvent *event)
         QPoint movePos = event->globalPos();
         parentWidget->move(movePos - movePoint);
     }
+    QWidget::mouseMoveEvent(event);
 }
 
 /************************** 鼠标双击 **************************/
@@ -216,7 +219,8 @@ void TitleBar::mouseDoubleClickEvent(QMouseEvent *event)
     }
 }
 
-void TitleBar::changeClothes()
+//更换皮肤
+void TitleBar::changeSkin()
 {
     static int clothesCnt = 0;
     switch (clothesCnt) {
@@ -238,3 +242,7 @@ void TitleBar::changeClothes()
 
 }
 
+void TitleBar::hideSkinButton()
+{
+    skinButton->hide();
+}

@@ -13,10 +13,10 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QCheckBox>
+#include <QtWidgets/QComboBox>
 #include <QtWidgets/QHeaderView>
-#include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
-#include <QtWidgets/QTableView>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -25,45 +25,43 @@ QT_BEGIN_NAMESPACE
 class Ui_Widget
 {
 public:
-    QVBoxLayout *verticalLayout_2;
     QVBoxLayout *verticalLayout;
-    QLineEdit *lineEdit;
+    QCheckBox *checkBox;
     QPushButton *pushButton;
-    QTableView *tableView;
+    QComboBox *comboBox;
 
     void setupUi(QWidget *Widget)
     {
         if (Widget->objectName().isEmpty())
             Widget->setObjectName(QStringLiteral("Widget"));
-        Widget->resize(400, 300);
-        verticalLayout_2 = new QVBoxLayout(Widget);
-        verticalLayout_2->setSpacing(6);
-        verticalLayout_2->setContentsMargins(11, 11, 11, 11);
-        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
-        verticalLayout_2->setSizeConstraint(QLayout::SetDefaultConstraint);
-        verticalLayout_2->setContentsMargins(9, 40, 9, -1);
-        verticalLayout = new QVBoxLayout();
+        Widget->resize(399, 319);
+        verticalLayout = new QVBoxLayout(Widget);
         verticalLayout->setSpacing(6);
+        verticalLayout->setContentsMargins(11, 11, 11, 11);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
-        verticalLayout->setContentsMargins(-1, 0, -1, -1);
-        lineEdit = new QLineEdit(Widget);
-        lineEdit->setObjectName(QStringLiteral("lineEdit"));
+        checkBox = new QCheckBox(Widget);
+        checkBox->setObjectName(QStringLiteral("checkBox"));
+        QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(checkBox->sizePolicy().hasHeightForWidth());
+        checkBox->setSizePolicy(sizePolicy);
 
-        verticalLayout->addWidget(lineEdit);
+        verticalLayout->addWidget(checkBox);
 
         pushButton = new QPushButton(Widget);
         pushButton->setObjectName(QStringLiteral("pushButton"));
+        sizePolicy.setHeightForWidth(pushButton->sizePolicy().hasHeightForWidth());
+        pushButton->setSizePolicy(sizePolicy);
 
         verticalLayout->addWidget(pushButton);
 
-        tableView = new QTableView(Widget);
-        tableView->setObjectName(QStringLiteral("tableView"));
-        tableView->setEnabled(true);
+        comboBox = new QComboBox(Widget);
+        comboBox->setObjectName(QStringLiteral("comboBox"));
+        sizePolicy.setHeightForWidth(comboBox->sizePolicy().hasHeightForWidth());
+        comboBox->setSizePolicy(sizePolicy);
 
-        verticalLayout->addWidget(tableView);
-
-
-        verticalLayout_2->addLayout(verticalLayout);
+        verticalLayout->addWidget(comboBox);
 
 
         retranslateUi(Widget);
@@ -74,7 +72,15 @@ public:
     void retranslateUi(QWidget *Widget)
     {
         Widget->setWindowTitle(QApplication::translate("Widget", "Widget", Q_NULLPTR));
+        checkBox->setText(QApplication::translate("Widget", "CheckBox", Q_NULLPTR));
         pushButton->setText(QApplication::translate("Widget", "PushButton", Q_NULLPTR));
+        comboBox->clear();
+        comboBox->insertItems(0, QStringList()
+         << QApplication::translate("Widget", "1", Q_NULLPTR)
+         << QApplication::translate("Widget", "2", Q_NULLPTR)
+         << QApplication::translate("Widget", "3", Q_NULLPTR)
+         << QApplication::translate("Widget", "4", Q_NULLPTR)
+        );
     } // retranslateUi
 
 };
